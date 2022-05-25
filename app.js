@@ -10,8 +10,13 @@ const game = document.querySelector('#game'),
   maxNum = document.querySelector('.max-num'),
   guessBtn = document.querySelector('#guess-btn'),
   guessInput = document.querySelector('#guess-input'),
-  message = document.querySelector('.message');
-
+  message = document.querySelector('.message'),
+  LR = document.querySelector('.LR'),
+  LG = document.querySelector('.LG'),
+  LB = document.querySelector('.LB'),
+  RR = document.querySelector('.RR'),
+  RG = document.querySelector('.RG'),
+  RB = document.querySelector('.RB');
 //Assign UI min and max
 minNum.textContent = min;
 maxNum.textContent = max;
@@ -39,39 +44,44 @@ guessBtn.addEventListener('click', function () {
 
   //check win
   if (guess === winningNum) {
-    // //Disable input
-    // guessInput.disabled = true;
-    // //Change border color
-    // guessInput.style.borderColor = 'green';
-    // //set Message
-    // setMessage(`${winningNum} is correct. You Win!!`, 'green');
     gameOver(true, `${winningNum} is correct. You Win!!`);
   } else {
     //Wrong number
     guessesLeft -= 1;
     console.log(guessesLeft);
-    if (guessesLeft === 0) {
-      //   //Game lost
-      //   //Disable input
-      //   guessInput.disabled = true;
-      //   //Change border color
-      //   guessInput.style.borderColor = 'red';
-      //   //set Message
-      //   setMessage(
-      //     ` Game Over. You lost. ${winningNum} is write number.`,
-      //     'red'
-      //   );
+    if (guessesLeft === 2) {
+      RR.style.backgroundColor = '#D4D4D4';
+      LR.style.backgroundColor = '#D4D4D4';
+    }
+    if (guessesLeft === 1) {
+      RR.style.backgroundColor = '#D4D4D4';
+      LR.style.backgroundColor = '#D4D4D4';
+      RG.style.backgroundColor = '#D4D4D4';
+      LG.style.backgroundColor = '#D4D4D4';
+    }
 
+    if (guessesLeft === 0) {
       gameOver(
         false,
         ` Game Over. You lost. ${winningNum} is write number.`
       );
+
+      RR.style.backgroundColor = '#D4D4D4';
+      RG.style.backgroundColor = '#D4D4D4';
+      RB.style.backgroundColor = '#D4D4D4';
+
+      LR.style.backgroundColor = '#D4D4D4';
+
+      LG.style.backgroundColor = '#D4D4D4';
+
+      LB.style.backgroundColor = '#D4D4D4';
     } else {
       //Game continue and wrong
       setMessage(
         ` ${guess} is not correct. guess Left : ${guessesLeft}`
       );
       guessInput.style.borderColor = 'red';
+      message.style.color = 'red';
       //clear input
       guessInput.value = ' ';
     }
@@ -104,7 +114,7 @@ function setMessage(msg, color) {
   message.textContent = msg;
 }
 
-//get randomNUmb
+//get randomNumber
 function getRandomNum(min, max) {
   return Math.floor(Math.random() * 10 + min);
 }
