@@ -49,6 +49,8 @@ guessBtn.addEventListener('click', function () {
     //Wrong number
     guessesLeft -= 1;
     console.log(guessesLeft);
+    message.style.color = 'red';
+
     if (guessesLeft === 2) {
       RR.style.backgroundColor = '#D4D4D4';
       LR.style.backgroundColor = '#D4D4D4';
